@@ -450,8 +450,8 @@ jobs:
 
       - name: Copy Binaries
         run: |
-          cp macos-10.15/bin/opencv-${{ env.OPENCV_VERSION_SHORT }}.jar upstream
-          cp macos-10.15/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.dylib src/main/resources/nu/pattern/opencv/osx/x86_64
+          cp macos-latest/bin/opencv-${{ env.OPENCV_VERSION_SHORT }}.jar upstream
+          cp macos-latest/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.dylib src/main/resources/nu/pattern/opencv/osx/x86_64
           cp macos-aarch64/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.dylib src/main/resources/nu/pattern/opencv/osx/ARMv8
           cp ubuntu/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/x86_64
           cp ubuntu-arm/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/ARMv7
