@@ -21,7 +21,7 @@ jobs:
   build_linux_arm: 
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
         java: [8]
 
     runs-on: ${{ matrix.os }}
@@ -45,7 +45,7 @@ jobs:
         uses: uraimo/run-on-arch-action@v2.5.1
         with:
           arch: armv7
-          distro: ubuntu20.04
+          distro: ubuntu22.04
           
            # Not required, but speeds up builds
           githubToken: ${{ github.token }}
@@ -64,13 +64,10 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y git wget cmake unzip build-essential default-jre default-jdk ant maven python3
 
-            dpkg --purge --force-depends ca-certificates-java
-            apt-get install ca-certificates-java
-
             # TODO: I'd like to get this path automatically somehow. I think it might be
             # in /etc/environment but sourcing it didn't seem to work. Need to figure out
             # where it would be after starting a new shell.
-            export JAVA_HOME=/usr/lib/jvm/jdk-17/
+            export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-armhf
 
             wget https://github.com/opencv/opencv/archive/${{ env.OPENCV_VERSION }}.zip > /dev/null
             unzip ${{ env.OPENCV_VERSION }} > /dev/null
@@ -130,7 +127,7 @@ jobs:
   build_linux_arm64: 
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
         java: [15]
 
     runs-on: ${{ matrix.os }}
@@ -154,7 +151,7 @@ jobs:
         uses: uraimo/run-on-arch-action@v2.5.1
         with:
           arch: aarch64
-          distro: ubuntu20.04
+          distro: ubuntu22.04
           
            # Not required, but speeds up builds
           githubToken: ${{ github.token }}
@@ -172,9 +169,6 @@ jobs:
           run: |
             apt-get update -q -y
             apt-get install -q -y git wget cmake unzip build-essential default-jre default-jdk ant maven python3
-
-            dpkg --purge --force-depends ca-certificates-java
-            apt-get install ca-certificates-java
 
             # TODO: I'd like to get this path automatically somehow. I think it might be
             # in /etc/environment but sourcing it didn't seem to work. Need to figure out
@@ -241,7 +235,7 @@ jobs:
   build_mac_linux_x64:
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-12]
+        os: [ubuntu-22.04, macos-12]
         java: [8]
 
     runs-on: ${{ matrix.os }}
@@ -389,7 +383,7 @@ jobs:
   build_windows:
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
         java: [15]
 
     runs-on: ${{ matrix.os }}
@@ -431,7 +425,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
         java: [8]
 
     runs-on: ${{ matrix.os }}
@@ -459,7 +453,7 @@ jobs:
           cp macos-12/bin/opencv-${{ env.OPENCV_VERSION_SHORT }}.jar upstream
           cp macos-12/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.dylib src/main/resources/nu/pattern/opencv/osx/x86_64
           cp macos-aarch64/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.dylib src/main/resources/nu/pattern/opencv/osx/ARMv8
-          cp ubuntu-20.04/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/x86_64
+          cp ubuntu-22.04/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/x86_64
           cp ubuntu-arm/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/ARMv7
           cp ubuntu-arm64/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/ARMv8
           cp windows-2016/x86/opencv_java${{ env.OPENCV_VERSION_SHORT }}.dll src/main/resources/nu/pattern/opencv/windows/x86_32
@@ -485,7 +479,7 @@ jobs:
     needs: build_dist
     strategy:
       matrix:
-        os: [macos-11, macos-12, windows-2019, ubuntu-20.04, ubuntu-22.04]
+        os: [macos-11, macos-12, windows-2019, ubuntu-22.04]
         java: [8, 9, 10, 11, 12, 13, 14, 15]
 
     runs-on: ${{ matrix.os }}
@@ -525,7 +519,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
         java: [8]
 
     runs-on: ${{ matrix.os }}
@@ -558,7 +552,7 @@ jobs:
           cp macos-12/bin/opencv-${{ env.OPENCV_VERSION_SHORT }}.jar upstream
           cp macos-12/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.dylib src/main/resources/nu/pattern/opencv/osx/x86_64
           cp macos-aarch64/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.dylib src/main/resources/nu/pattern/opencv/osx/ARMv8
-          cp ubuntu-20.04/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/x86_64
+          cp ubuntu-22.04/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/x86_64
           cp ubuntu-arm/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/ARMv7
           cp ubuntu-arm64/lib/libopencv_java${{ env.OPENCV_VERSION_SHORT }}.so src/main/resources/nu/pattern/opencv/linux/ARMv8
           cp windows-2016/x86/opencv_java${{ env.OPENCV_VERSION_SHORT }}.dll src/main/resources/nu/pattern/opencv/windows/x86_32
