@@ -64,8 +64,8 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y git wget cmake unzip build-essential default-jre default-jdk ant maven python3
 
-            mkdir -p /etc/ssl/certs/java/
-            apt-get install --reinstall -o dpkg::Options::="--force-confask,confnew,confmiss" --reinstall ca-certificates-java ssl-cert openssl ca-certificates
+            dpkg --purge --force-depends ca-certificates-java
+            apt-get install ca-certificates-java
 
             # TODO: I'd like to get this path automatically somehow. I think it might be
             # in /etc/environment but sourcing it didn't seem to work. Need to figure out
@@ -173,8 +173,8 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y git wget cmake unzip build-essential default-jre default-jdk ant maven python3
 
-            mkdir -p /etc/ssl/certs/java/
-            apt-get install --reinstall -o dpkg::Options::="--force-confask,confnew,confmiss" --reinstall ca-certificates-java ssl-cert openssl ca-certificates
+            dpkg --purge --force-depends ca-certificates-java
+            apt-get install ca-certificates-java
 
             # TODO: I'd like to get this path automatically somehow. I think it might be
             # in /etc/environment but sourcing it didn't seem to work. Need to figure out
